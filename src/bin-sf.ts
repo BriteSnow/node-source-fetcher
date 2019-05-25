@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as minimist from 'minimist';
 import { ParsedArgs } from 'minimist';
 import { sfetch } from '.';
@@ -11,10 +12,10 @@ async function run(agv: ParsedArgs) {
 	let path: string | undefined = argv._[0]; // the path (by default )
 
 	path = (!path) ? './' : path;
-	console.log(path);
 	const files = await sfetch(path);
 	let fetchedCount = 0, skippedCount = 0;
 
+	console.log(`==== source-fetcher '${path}'`)
 	for (const fi of files) {
 		if (fi.success) {
 			fetchedCount++;
