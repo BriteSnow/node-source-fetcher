@@ -1,6 +1,6 @@
 {
   "name": "source-fetcher",
-  "version": "0.1.1",
+  "version": "0.1.2-SNAPSHOT",
   "description": "Sharing code that should not be in a library",
   "author": "Jeremy Chone <jeremy.chone@gmail.com>",
   "main": "dist/index.js",

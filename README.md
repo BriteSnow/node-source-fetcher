@@ -60,14 +60,19 @@ async function run(){
 
 - Supported default file extensions `ts|pcss|js|css|swift|rust|java|py|go`
 - `// <origin` must be in the first line at the beginning of the line.
-- When glob pattern ends with `**` the default file extension `/*.+(ts|pcss....)` will be added. This allows to do `npm run sf 'src/**'` and still have the above default extensions added.
-- Beware that this files will be modified on fetch and are not generally intended to be modified on the current folder. 
+- When glob pattern ends with `**` the default file extensions `/*.+(ts|pcss....)` will be added. This allows to do `npm run sf 'src/**'` and still have the above default extensions added.
+- Beware that there are current no  git guard that check if the files to be replaced have been committed or not. 
 
 
 ### Roadmap
 
-- add more extension support 
+- Only write files when the content actually change. 
+- Add support for `# <origin ...>` comment-tag (e.g., for python and yaml)
+- Update the console log (`== Fetched: 6 | Replaced: 2 | Skipped: 3 | Failed: 1` ) (what is called 'Skipped' will be called 'Failed')
+  - Only Replaced and Failed source files will be listed. 
+- Add color to console log.
 - Supports multiple glob params, including exclude `npm run sf 'src/**/*.ts' '!test/**'`
 - add `--dry-run` mode
-- Add support for **slots** `<slot name='a-placeholder'/>`
-- Check that planned files to be updated are not in a git uncommitted state. 
+- Git guard: Pause and ask to continue when a source files are scheduled to be replaced but were not committed. (will stop the replace of others as well until user confirm to override)
+- Add support for **insert** `<insert at="last">...</insert>` and/or **slots** `<slot name='a-placeholder'/>` 
+
