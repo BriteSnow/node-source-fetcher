@@ -28,7 +28,7 @@
     "test": "./node_modules/.bin/mocha --opts mocha.opts",
     "prepare": "rm -Rf ./dist && tsc",
     "testg": "./node_modules/.bin/mocha -g", 
-    "sf": "./node_modules/.bin/ts-node ./src/bin-sf.ts"
+    "sf": "./node_modules/.bin/ts-node ./src/bin-sf.ts './test/data/src/**'"
   },
   "license": "MIT",
   "bugs": {
