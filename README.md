@@ -56,6 +56,13 @@ async function run(){
 
 ```
 
+## Command Options
+
+- `-l` to list all of the fetchable files (files marked with a valid `// <origin ...` comment tag)
+- `-o` show the orgin.scr next to the fetchable (for now only works with `-l`, e.g., `-lo`)
+
+> Tips: When `sf` used from npm script, `--` must be added before the options. e.g., `npm run sf "src/**" -- -l`
+
 ## Notes
 
 - Supported default file extensions `ts|pcss|js|css|swift|rust|java|py|go`
