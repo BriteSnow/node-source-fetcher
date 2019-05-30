@@ -6,7 +6,9 @@ import got = require('got');
 type FileInfo = {
 	file: string,
 	firstLine: string,
-	origin: string
+	origin: {
+		src: string
+	}
 }
 
 export const RGX_ORIGIN_LINE = /^(\/\/|\/\*)\s*<origin\s*src=["'](.*)["']\s*\/>/;
@@ -42,8 +44,8 @@ export async function listFiles(pattern?: string) {
 		const firstLine = await readFirstLine(file);
 		const m = firstLine.match(RGX_ORIGIN_LINE);
 		if (m && m.length > 2) {
-			const origin = m[2].trim();
-			fileInfoList.push({ file, firstLine, origin });
+			const src = m[2].trim();
+			fileInfoList.push({ file, firstLine, origin: { src } });
 		}
 	}
 	return fileInfoList;

@@ -73,10 +73,7 @@ async function run(){
 
 ### Roadmap
 
-- Only write files when the content actually change. 
 - Add support for `# <origin ...>` comment-tag (e.g., for python and yaml)
-- Update the console log (`== Fetched: 6 | Replaced: 2 | Skipped: 3 | Failed: 1` ) (what is called 'Skipped' will be called 'Failed')
-  - Only Replaced and Failed source files will be listed. 
 - Add color to console log.
 - Supports multiple glob params, including exclude `npm run sf 'src/**/*.ts' '!test/**'`
 - add `--dry-run` mode

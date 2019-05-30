@@ -29,24 +29,37 @@ async function run(agv: ParsedArgs) {
 	//// perform the fetching
 	else {
 		const files = await sfetch(path);
-		let fetchedCount = 0, skippedCount = 0;
 
-		console.log(`==== source-fetcher FETCH '${path}'`)
+		console.log(`==== source-fetcher FETCH '${path}'`);
+		let replacedCount = 0, skippedCount = 0, failedCount = 0;
+
 		for (const fi of files) {
-			if (fi.success) {
-				fetchedCount++;
-				console.log(`Fetched ${fi.file}`);
-			} else {
+			if (fi.status === 'replaced') {
+				replacedCount++;
+				console.log(`Replaced: ${fi.file}`);
+			} else if (fi.status === 'failed') {
+				failedCount++
+				console.log(`Failed - ${fi.file} cause: ${fi.error}`);
+			} else if (fi.status === 'skipped') {
 				skippedCount++;
-				console.log(`Skipped ${fi.file} cause: ${fi.error}`);
+				// no log on skipped
 			}
-
+			// should never happen, but just in case
+			else {
+				console.log(`CODE ERROR - unknown status ${fi.status} for file ${fi.file}`);
+			}
 		}
 
-		let message = `== Fetched ${fetchedCount}`;
-		if (skippedCount > 0) {
-			message += ` | Skipped ${skippedCount}`;
+		let message = '== ';
+		if (replacedCount === 0 && failedCount === 0) {
+			message += 'All source up to date'
+		} else {
+			message += ` Replaced: ${replacedCount}`;
+			if (failedCount > 0) {
+				message += ` | Error: ${failedCount}`;
+			}
 		}
+		message += ` (total processed: ${files.length})`;
 		console.log(message);
 	}
 

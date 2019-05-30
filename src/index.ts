@@ -1,13 +1,17 @@
 
 import { listFiles, RGX_ORIGIN_LINE, readContent } from './utils';
-import { writeFile } from 'fs-extra-plus';
+import { writeFile, readFile } from 'fs-extra-plus';
 
+
+type Status = 'replaced' | 'skipped' | 'failed';
 
 type FetchedItem = {
-	success: boolean,
+	status: Status,
 	file: string,
 	firstLine: string,
-	origin: string,
+	origin: {
+		src: string
+	},
 	error?: string,
 }
 
@@ -21,7 +25,7 @@ export async function sfetch(pattern: string) {
 
 			const firstLine = fi.firstLine;
 
-			let originBody = await readContent(fi.origin);
+			let originBody = await readContent(fi.origin.src);
 
 
 			// remove the eventual origin firstLine
@@ -32,14 +36,20 @@ export async function sfetch(pattern: string) {
 				originBody = (originFirsLineIdx + 1 < originBody.length) ? originBody.substring(originFirsLineIdx + 1) : '';
 			}
 
+			// create the new content
 			const newBody = firstLine + '\n' + originBody;
 
-			await writeFile(fi.file, newBody);
-
-			data.push({ ...fi, success: true });
+			// compare the new content with existing content
+			const currentBody = await readFile(fi.file, 'utf8');
+			if (newBody === currentBody) {
+				data.push({ ...fi, status: 'skipped' })
+			} else {
+				await writeFile(fi.file, newBody);
+				data.push({ ...fi, status: 'replaced' })
+			}
 		} catch (ex) {
 			const error = (ex.message) ? ex.message : '' + ex;
-			data.push({ ...fi, error, success: false });
+			data.push({ ...fi, status: 'failed', error });
 		}
 
 	}
