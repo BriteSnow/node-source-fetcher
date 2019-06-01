@@ -65,15 +65,15 @@ async function run(){
 
 ## Notes
 
-- Supported default file extensions `ts|pcss|js|css|swift|rust|java|py|go`
-- `// <origin` must be in the first line at the beginning of the line.
+- Supported default file extensions `ts|pcss|js|css|swift|rust|java|py|go|yaml|html|tmpl`
+- Comment tags `// <origin` must be in the first line at the beginning of the line.
+- Supported comment tags: `// <origin src="..." />`, `/* <origin src="..." /> ...`, `# <origin src="..."> ...`
 - When glob pattern ends with `**` the default file extensions `/*.+(ts|pcss....)` will be added. This allows to do `npm run sf 'src/**'` and still have the above default extensions added.
 - Beware that there are current no  git guard that check if the files to be replaced have been committed or not. 
 
 
 ### Roadmap
 
-- Add support for `# <origin ...>` comment-tag (e.g., for python and yaml)
 - Add color to console log.
 - Supports multiple glob params, including exclude `npm run sf 'src/**/*.ts' '!test/**'`
 - add `--dry-run` mode

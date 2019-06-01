@@ -11,9 +11,9 @@ type FileInfo = {
 	}
 }
 
-export const RGX_ORIGIN_LINE = /^(\/\/|\/\*)\s*<origin\s*src=["'](.*)["']\s*\/>/;
+export const RGX_ORIGIN_LINE = /^(\/\/|\/\*|#|<!--)\s*<origin\s*src=["'](.*)["']\s*\/>/;
 const GLOB_EXCLUDES = ['!**/.git/**', '!**/node_modules/**'];
-const EXT_DEFAULT = '(ts|pcss|js|css|swift|rust|java|py|go)';
+const EXT_DEFAULT = '(ts|pcss|js|css|swift|rust|java|py|go|yaml|html|tmpl)';
 
 //#region    ---------- list files ---------- 
 /**
