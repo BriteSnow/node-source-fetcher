@@ -14,7 +14,7 @@ describe("index", function () {
 
 	it("list", async () => {
 		let files = await listFiles(testDataDir);
-		strictEqual(files.length, 3, `source files in ${testDataDir}`);
+		strictEqual(files.length, 6, `source files in ${testDataDir}`);
 
 		files = await listFiles('./src/**.ts');
 		strictEqual(files.length, 0, `source with origin files in "./src/**.ts"`);
@@ -33,7 +33,7 @@ describe("index", function () {
 		await copy(testDataDir, testTmpDir);
 		const files = await sfetch(testTmpDir);
 		for (const f of files) {
-			if (!f.success) {
+			if (f.status === "failed") {
 				throw new Error(`File ${f.file} did not process because ${f.error}`);
 			}
 		}
