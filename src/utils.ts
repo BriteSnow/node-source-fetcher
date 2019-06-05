@@ -11,9 +11,11 @@ type FileInfo = {
 	}
 }
 
+
 export const RGX_ORIGIN_LINE = /^(\/\/|\/\*|#|<!--)\s*<origin\s*src=["'](.*)["']\s*\/>/;
 const GLOB_EXCLUDES = ['!**/.git/**', '!**/node_modules/**'];
 const EXT_DEFAULT = '(ts|pcss|js|css|swift|rust|java|py|go|yaml|html|tmpl)';
+const TIMEOUT = 2000;
 
 //#region    ---------- list files ---------- 
 /**
@@ -64,7 +66,7 @@ export async function listFiles(pattern?: string) {
  */
 export async function readContent(url: string): Promise<string> {
 	if (url.startsWith('http')) {
-		const response = await got(url, { timeout: 300 });
+		const response = await got(url, { timeout: TIMEOUT });
 		return response.body;
 	}
 	// else assume, local file
