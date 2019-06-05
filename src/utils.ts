@@ -42,11 +42,14 @@ export async function listFiles(pattern?: string) {
 
 	for (const file of files) {
 		const firstLine = await readFirstLine(file);
-		const m = firstLine.match(RGX_ORIGIN_LINE);
-		if (m && m.length > 2) {
-			const src = m[2].trim();
-			fileInfoList.push({ file, firstLine, origin: { src } });
+		if (firstLine) {
+			const m = firstLine.match(RGX_ORIGIN_LINE);
+			if (m && m.length > 2) {
+				const src = m[2].trim();
+				fileInfoList.push({ file, firstLine, origin: { src } });
+			}
 		}
+
 	}
 	return fileInfoList;
 }
@@ -74,7 +77,7 @@ export async function readContent(url: string): Promise<string> {
 //#endregion ---------- /Fetch Origin ---------- 
 
 // reads and returns the first line of a file (and stop)
-export async function readFirstLine(file: string): Promise<string> {
+export async function readFirstLine(file: string): Promise<string | null> {
 
 	return new Promise((resolve, reject) => {
 
@@ -87,6 +90,11 @@ export async function readFirstLine(file: string): Promise<string> {
 				resolve(line);
 				rl.close();
 			});
+			rl.on('close', function () {
+				resolve(null);
+				rl.close();
+			});
+
 		} catch (ex) {
 			reject(ex);
 		}

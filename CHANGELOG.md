@@ -1,4 +1,7 @@
 
+### v0.1.5
+
+  - Fix bug when file was empty (silent fail)
 
 ### v0.1.4
   - added `yaml|html|tmpl` scanned file extensions. 
