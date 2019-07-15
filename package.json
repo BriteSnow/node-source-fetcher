@@ -6,28 +6,28 @@
   "main": "dist/index.js",
   "bin": {
     "sf": "./dist/bin-sf.js"
-  },  
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/BriteSnow/node-source-fetcher.git"
   },
   "dependencies": {
-    "@types/got": "^9.4.4",
+    "@types/got": "^9.6.1",
     "@types/minimist": "^1.2.0",
-    "fs-extra-plus": "^0.5.6",
+    "fs-extra-plus": "^0.5.8",
     "got": "^9.6.0",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.6",
+    "@types/mocha": "^5.2.7",
     "mocha": "^6.1.4",
-    "ts-node": "^8.1.0",
-    "typescript": "^3.4.5"
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --opts mocha.opts",
     "prepare": "rm -Rf ./dist && tsc",
-    "testg": "./node_modules/.bin/mocha -g", 
+    "testg": "./node_modules/.bin/mocha -g",
     "sf": "./node_modules/.bin/ts-node ./src/bin-sf.ts './test/data/src/**'"
   },
   "license": "MIT",
