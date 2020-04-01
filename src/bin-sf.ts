@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import * as minimist from 'minimist';
-import { ParsedArgs } from 'minimist';
+import minimist, { ParsedArgs } from 'minimist';
 import { sfetch } from '.';
 import { listFiles } from './utils';
 
