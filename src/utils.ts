@@ -1,7 +1,7 @@
 import { createReadStream, glob, readFile } from 'fs-extra-plus';
+import got from 'got';
 import { join } from 'path';
-import * as readline from 'readline';
-import got = require('got');
+import readline from 'readline';
 
 type FileInfo = {
 	file: string,
