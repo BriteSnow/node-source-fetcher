@@ -1,3 +1,8 @@
+### v0.1.9
+
+- FULLY DEPRECATE
+
+
 ### v0.1.7
 
 - Update dependencies

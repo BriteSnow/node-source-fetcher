@@ -1,34 +1,17 @@
 {
   "name": "source-fetcher",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Sharing code that should not be in a library",
   "author": "Jeremy Chone <jeremy.chone@gmail.com>",
   "main": "dist/index.js",
-  "bin": {
-    "sf": "./dist/bin-sf.js"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/BriteSnow/node-source-fetcher.git"
   },
   "dependencies": {
-    "@types/got": "^9.6.9",
-    "@types/minimist": "^1.2.0",
-    "fs-extra-plus": "^0.5.15",
-    "got": "^10.7.0",
-    "minimist": "^1.2.5"
-  },
-  "devDependencies": {
-    "@types/mocha": "^7.0.2",
-    "mocha": "^7.1.1",
-    "ts-node": "^8.8.1",
-    "typescript": "^3.8.3"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --opts mocha.opts",
-    "prepare": "rm -Rf ./dist && tsc",
-    "testg": "./node_modules/.bin/mocha -g",
-    "sf": "./node_modules/.bin/ts-node ./src/bin-sf.ts './test/data/src/**'"
+    "prepare": "rm -Rf ./dist && tsc"
   },
   "license": "MIT",
   "bugs": {
@@ -37,11 +20,5 @@
   "files": [
     "src/",
     "dist/"
-  ],
-  "keywords": [
-    "fetch",
-    "fetcher",
-    "source file",
-    "synchronize"
   ]
 }
